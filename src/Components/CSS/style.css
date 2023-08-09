@@ -1,0 +1,50 @@
+@font-face {
+    font-family: myRegularFont;
+    src: url(../Assets/Fonts/REM-Medium.ttf);
+}
+
+@font-face {
+    font-family: myTitleFont;
+    src: url(../Assets/Fonts/REM-Bold.ttf);
+}
+
+@font-face {
+    font-family: myPoppinsFont;
+    src: url(../Assets/Fonts/Poppins-Regular.ttf);
+}
+
+@font-face {
+    font-family: myPoppinsBoldFont;
+    src: url(../Assets/Fonts/Poppins-SemiBold.ttf);
+}
+
+* {
+    font-family: myRegularFont;
+}
+
+.title {
+    font-family: myTitleFont;
+}
+.myPoppinsTitleFont {
+    font-family: myPoppinsBoldFont;
+}
+.myPoppinsFont {
+    font-family: myPoppinsFont;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-shadow {
+    box-shadow: 0 8px 16px 0 #6a6a6a1a;
+}
+.background{
+    background: linear-gradient(89.8deg, rgb(39, 115, 255) 4.3%, rgb(62, 211, 232) 101.4%);
+} 
+
+textarea:focus, input:focus{
+    outline: none;
+}
