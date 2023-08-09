@@ -22,7 +22,7 @@ module.exports = {
     },
     fontSize: {
       'sm': '14px',
-      'tiny': '12px',
+      'tiny': '14px',
       'base': '16px',
       'h6': '16px',
       'h5': '18px',
