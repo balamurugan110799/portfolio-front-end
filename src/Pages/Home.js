@@ -5,6 +5,8 @@ import diamond from "../Components/Assets/Images/diamond.png"
 import artsign from "../Components/Assets/Images/art-sign.png"
 import { IconNameCgArrowsScrollV } from "react-icons/cg";
 import profile from "../Components/Assets/Images/profile.png"
+import about from "../Components/Assets/Images/about.png"
+import { PiTelegramLogoLight } from "react-icons/pi";
 export default function Home() {
     const [darkMode, setDarkMode] = useState(false)
     const handleDrakMode = () => {
@@ -38,31 +40,31 @@ export default function Home() {
             ]
         }
     ]
-   
+
     return (
         <div>
             <section className={` ${darkMode ? 'bg-primary' : "bg-secondary"} z-50 fixed w-full box-shadow`}>
                 <div className='container mx-auto'>
-                    {nav?.map((v)=>{
-                        return(
+                    {nav?.map((v) => {
+                        return (
                             <nav className='py-8 grid grid-cols-2 h-full'>
-                            <div className='flex col-span-1 h-full py-3'>
-                                <div className='h-[30px] rounded-[50%]  w-[30px] bg-black center text-white'>
-                                    B
+                                <div className='flex col-span-1 h-full py-3'>
+                                    <div className='h-[30px] rounded-[50%]  w-[30px] bg-black center text-white'>
+                                        B
+                                    </div>
+                                    <div className={`${darkMode ? "text-white" : "text-primary"} text-h5 mx-4 pt-1 `}>{v?.user_name}</div>
                                 </div>
-                                <div className={`${darkMode ? "text-white" : "text-primary"} text-h5 mx-4 pt-1 `}>{v?.user_name}</div>
-                            </div>
-                            <div className=' col-span-1'>
-                                <div className=' grid grid-cols-7'>
-                                    {v?.nav_list.map((nav)=>{
-                                        return(
-                                            <div className={`${darkMode}  center `}>
+                                <div className=' col-span-1'>
+                                    <div className=' grid grid-cols-7'>
+                                        {v?.nav_list.map((nav) => {
+                                            return (
+                                                <div className={`${darkMode}  center `}>
 
-                                            <div className={`${darkMode ? "text-white" : ""} text-text-color hover:text-black duration-300 cursor-pointer`}>{nav?.name}</div>
-                                        </div>
-                                        )
-                                    })}
-                                    {/* <div className={`${darkMode}  center `}>
+                                                    <div className={`${darkMode ? "text-white" : ""} text-text-color hover:text-black duration-300 cursor-pointer`}>{nav?.name}</div>
+                                                </div>
+                                            )
+                                        })}
+                                        {/* <div className={`${darkMode}  center `}>
                                         <div className={`${darkMode ? "text-white" : ""} text-text-color hover:text-black duration-300 cursor-pointer`}>Home</div>
                                     </div>
                                     <div className={`${darkMode}  center `}>
@@ -74,21 +76,21 @@ export default function Home() {
                                     <div className={`${darkMode}  center `}>
                                         <div className={`${darkMode ? "text-white" : ""} text-text-color hover:text-black duration-300 cursor-pointer`}>Project</div>
                                     </div> */}
-                                    <div className='col-span-2'>
-                                        <div className={`${darkMode ? "bg-white" : "bg-primary text-white  "}  center py-4  cursor-pointer  hover:bg-active-color duration-300 mx-4 `}>
-                                            Contact
+                                        <div className='col-span-2'>
+                                            <div className={`${darkMode ? "bg-white" : "bg-primary text-white  "}  center py-4  cursor-pointer  hover:bg-active-color duration-300 mx-4 `}>
+                                                Contact
+                                            </div>
+                                        </div>
+                                        <div className={`${darkMode ? "text-white" : ""} center duration-300`}>
+                                            <button className={`duration-300`} onClick={() => handleDrakMode()}>Dark</button>
                                         </div>
                                     </div>
-                                    <div className={`${darkMode ? "text-white" : ""} center duration-300`}>
-                                        <button className={`duration-300`} onClick={() => handleDrakMode()}>Dark</button>
-                                    </div>
                                 </div>
-                            </div>
-                        </nav>
+                            </nav>
                         )
-                       
+
                     })}
-                    
+
                 </div>
             </section>
 
@@ -125,6 +127,47 @@ export default function Home() {
                     </div>
 
                 </div>
+            </section>
+
+            <section className=' bg-secondary py-16'>
+                <div className='  py-10 container mx-auto'>
+                    <div className=' grid grid-cols-2 py-8'>
+
+
+                        <div>
+                            <img src={about} alt="about" className='mx-auto px-16' />
+                        </div>
+                        <div className='relative h-full py-10'>
+                            <div className='grid grid-cols-3 relative '>
+                                <div className={` text-primary text-[54px] pt-16 col-span-2 `}>About me</div>
+
+                            </div>
+                            <div className='flex   pt-10'>
+                                <div className='h-[2px] mt-4 w-[60px] bg-[#222]'>
+
+                                </div>
+                                <div className={` text-h2 text-text-color px-4`}>
+                                    Passionate about creating Web Pages with UI/UX User Interface. I have a year of experience and many client are happy with the project carried out.
+                                </div>
+
+                            </div>
+                            <div className='px-10 pt-8'>
+                                <div className='text-primary'>
+                                    My SKill Are : <span className='text-text-color'>HTML, CSS, JavaScript, Jquery, React JS, Redux, Tailwind CSS, Bootstrap, JSON,  API Intergation and Github </span> 
+                                </div>
+                            </div>
+                            <button className='mx-10  my-10 flex group bg-primary text-white    center py-4  cursor-pointer  hover:bg-active-color duration-300   px-10'><PiTelegramLogoLight className='mx-2 text-h5 '/> Contact Me</button>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </section>
+
+            <section>
+                
             </section>
         </div>
     )

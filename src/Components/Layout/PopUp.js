@@ -37,7 +37,7 @@ console.log(props)
               <div className={` ${props.width === "sm" ? "h-[30vh] overflow-auto " : ""} ${props.width === "md" ? "h-[50vh] overflow-auto " : ""} ${props.width === "lg" ? "h-[60vh] overflow-auto" : ""}  `}>
                 <div>
 
-                <p className="w-[80%]  mx-auto text-text-color pt-6 text-center text-base pb-6"> An error has occured while creating an report.</p>
+                <p className="w-[80%]  mx-auto text-text-color pt-6 text-center text-base pb-6"> {props.message}</p>
                 {props.actionbar ? <div className="flex justify-end px-4 pb-2">
                 <button    onClick={handleClick} className="bg-primary py-2 mx-2 px-8 text-base hover:bg-loginbg text-white rounded-md">
                     Cancel

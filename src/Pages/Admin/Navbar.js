@@ -15,12 +15,22 @@ function Navbar() {
         nav_name: "",
         url: ""
     })
-const [popUpState,setPopUpState]=useState(false)
-    const [popup,setPopUp]=useState({
-        type:"",
-        message:""
+    const [popUpState, setPopUpState] = useState(false)
+    const [popup, setPopUp] = useState({
+        type: "",
+        message: ""
+    })
+    const [action, setAction] = useState("")
+
+    const [updateValue, setUpdateValue] = useState({
+        nav_name: "",
+        url: ""
     })
     const [defaultVal, setDefaultVal] = useState(true)
+
+    const [editPopUp, setEditPopUp] = useState(false)
+    const [message, setMessage] = useState("")
+
 
     const [dataVal, setDataVal] = useState(false)
 
@@ -52,39 +62,81 @@ const [popUpState,setPopUpState]=useState(false)
     const handleSubmit = () => {
         console.log(errors.nav_name)
         setDataVal(true)
-        if( errors.nav_name ===true && errors.url===true ){
-           AddNavData()
+        if (errors.nav_name === true && errors.url === true) {
+            AddNavData()
         }
     }
 
-    const popUpHandler = () =>{
+    const popUpHandler = () => {
         setPopUpState(!popUpState)
     }
 
-    const AddNavData = ()=>{
-        axios.post("http://localhost:4040/api/addNav",data)
-                .then((res) => {
-                    setToggle(false)
-                    getAllData()
-                    console.log(res.status,"201")
-                    if(res.status===201){
-                        alert("201")
-                        setPopUpState(true)
-                        setPopUp({
-                            type:"success",
-                            message:"Nav Added SuccessFully..."
-                        })
-                    }
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
+
+
+    const AddNavData = () => {
+        axios.post("http://localhost:4040/api/addNav", data)
+            .then((res) => {
+                setToggle(false)
+                getAllData()
+                console.log(res.status, "201")
+                if (res.status === 201) {
+                    alert("201")
+                    setPopUpState(true)
+                    setPopUp({
+                        type: "success",
+                        message: "Nav Added SuccessFully..."
+                    })
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    const DeleteNav = (v) => {
+        axios.delete(`http://localhost:4040/api/removeNav/${v._id}`, v)
+            .then((res) => {
+                setToggle(false)
+                getAllData()
+                console.log(res.status, "201")
+                if (res.status === 200) {
+                    alert("201")
+                    setPopUpState(true)
+                    setPopUp({
+                        type: "success",
+                        message: "Nav Added SuccessFully..."
+                    })
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    const updateDataNavData = () => {
+        axios.put(`http://localhost:4040/api/updateNav/${data._id}`, data)
+            .then((res) => {
+                setToggle(false)
+                getAllData()
+                console.log(res.status, "201")
+                if (res.status === 200) {
+                    alert("201")
+                    setPopUpState(true)
+                    setPopUp({
+                        type: "success",
+                        message: "Nav Added SuccessFully."
+                    })
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     const getAllData = () => {
         axios.get("http://localhost:4040/api/getAllNav")
             .then((res) => {
-               
+
                 setGetData(res.data.nav_data)
             })
             .catch((err) => {
@@ -92,90 +144,89 @@ const [popUpState,setPopUpState]=useState(false)
             })
     }
     useEffect(() => {
-
-     
         getAllData()
     }, [])
 
-    const toggleHandler = () => {
+    const Edit = (v, i) => {
         setToggle(!toggle)
+        setAction("Edit")
+        // data.nav_name = v.nav_name
+        // data.url = v.url
+        setData(v)
+        setEditPopUp(true)
+    }
+
+
+
+    useEffect(() => {
+
+    }, [])
+
+    const updatePop = () => {
+        updateDataNavData()
+    }
+
+    const toggleHandler = () => {
+        setAction("Add")
+        setData({})
+        setToggle(!toggle)
+        setDataVal(false)
     }
 
     return (
         <div>
+
             <Minlayout>
                 <PopUp
                     state={popUpState}
                     type={popup.type}
+                    message={popup.message}
                     handleClick={popUpHandler}
                 />
+
                 <ActionPopUp
                     state={toggle}
-                    title="Add"
+                    title={action}
                 >
-
                     <InputBox
                         label="Nav Name"
                         placeholder="Enter the Nav name"
                         className="w-full"
                         type="text"
                         name="nav_name"
+                        value={data.nav_name}
                         id="nav_name"
                         handleChange={(e) => handleChange(e)}
                     />
-
                     {dataVal ? <span className='text-error text-sm'> {errors.nav_name}</span> : null}
-
-
                     <InputBox
                         divclass="pt-2"
                         label="Nav Name"
                         name="url"
                         id="url"
+                        value={data.url}
                         placeholder="Enter the Nav ID"
                         className="w-full "
                         handleChange={(e) => handleChange(e)}
                     />
                     {dataVal ? <span className='text-error text-sm'> {errors.url}</span> : null}
-
-
-                    <div className="flex justify-end px-4 pt-3 ">
-                        <Button name="Cancel" className="mx-2" onClick={toggleHandler} />
+                    {action === "Add" ? <div className="flex justify-end px-4 pt-3 ">
+                        <Button name="Cancel" className="mx-2" onClick={() => toggleHandler()} />
                         <Button name="Add" onClick={handleSubmit} />
-                    </div>
+                    </div> : <div className="flex justify-end px-4 pt-3 ">
+                        <Button name="Cancel" className="mx-2" onClick={() => toggleHandler()} />
+                        <Button name="Update" onClick={updatePop} />
+                    </div>}
+
                 </ActionPopUp>
                 <ActionBar
                     button_name="Add"
-                    event={toggleHandler}
+                    event={() => toggleHandler()}
                 >
-                    <Button
-                        name="Add"
-                        onClick={toggleHandler}
-                    />
                 </ActionBar>
 
 
                 <div className='p-2'>
-                    <div className=' grid  grid-cols-12'>
-                        <div className=' col-span-4'>
-                            <InputBox type={"text"}
-                                className="w-[80%]"
-                                label="Nav Name"
-                                placeholder={"Enter the Nav"}
-                            // handleChange={(e) => handleChnage(e)}
-                            />
-                        </div>
-                        <div className=' col-span-4'>
-                            <InputBox type={"text"}
-                                className="w-[80%]"
-                                label="Nav Name"
-                                placeholder={"Enter the Nav"}
-                            // handleChange={(e) => handleChnage(e)}
-                            />
-                        </div>
-
-
-                    </div>
 
                     <table className='w-[100%]'>
                         <tr className='py-2 bg-[#e3e3e3]'>
@@ -200,10 +251,10 @@ const [popUpState,setPopUpState]=useState(false)
                                             {v?.url}
                                         </td>
                                         <td className='myPoppinsFont text-center text-base text-text-color py-1'>
-                                            <RiEditBoxLine className='mx-auto text-dashboard' />
+                                            <RiEditBoxLine className='mx-auto text-dashboard' onClick={() => Edit(v, i)} />
                                         </td>
                                         <td className='myPoppinsFont   text-base py-1'>
-                                            <RiDeleteBin5Line className='mx-auto text-[#ff593d] text-base' />
+                                            <RiDeleteBin5Line onClick={() => DeleteNav(v, i)} className='mx-auto text-[#ff593d] text-base' />
                                         </td>
                                     </tr>
                                 )

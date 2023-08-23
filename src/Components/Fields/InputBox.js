@@ -9,6 +9,7 @@ function InputBox(props) {
                     placeholder={props.placeholder}
                     name={props.name}
                     id={props.id}
+                    value={props.value}
                     className={` ${props.className}
 
                 myPoppinsFont border text-tiny border-[#ccc] p-2`}
