@@ -31,6 +31,10 @@
 .myPoppinsFont {
     font-family: myPoppinsFont;
 }
+.container{
+    width: 1400px;
+    margin: 0px auto;
+}
 
 .center{
     display: flex;
