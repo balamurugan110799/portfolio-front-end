@@ -6,6 +6,7 @@ import Home from './Pages/Home';
 import { BrowserRouter, Route, Routes, Navigate  } from 'react-router-dom';
 import PageNotFound from './Pages/PageNotFound';
 import Navbar from './Pages/Admin/Navbar';
+import Project from './Pages/Admin/Project';
 function App() {
   console.log(localStorage.auth!==null)
   return (
@@ -17,7 +18,10 @@ function App() {
         {localStorage.auth !== null && localStorage.auth !== undefined ? 
         
         
-        <><Route path="/dashboard" element={<DashBoard />} /> <Route path="/navbar" element={<Navbar />} /></>
+        <><Route path="/dashboard" element={<DashBoard />} /> <Route path="/navbar" element={<Navbar />} />
+        
+        <Route path="/project" element={<Project />} />
+        </>
         
         :  <Route path="*" element={<Navigate replace to="/login" />} />}
        

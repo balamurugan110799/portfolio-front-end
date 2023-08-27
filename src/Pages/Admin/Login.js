@@ -54,12 +54,13 @@ function Login() {
     e.preventDefault();
  
     if (error.email === true && error.password === true) {
-      axios.post('http://localhost:4040/api/login', data)
+      axios.post('http://localhost:4000/api/login', data)
         .then((res) => {
-          navigate('/dashboard')
+          // alert("Hello")
           console.log(res.data.token)
           const token = res.data.token
           localStorage.setItem("auth", token)
+          navigate('/dashboard')
         
           dbMessage.password = ""
          

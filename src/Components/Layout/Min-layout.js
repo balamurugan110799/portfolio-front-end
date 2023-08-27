@@ -19,8 +19,8 @@ export default function Minlayout(props) {
                 <div className=' col-span-2'>
                     <ul className='px-4'>
                         <li className='py-2 text-text-color'>
-                            <Link to="/navbar" className='myPoppinsFont'>
-                                NavBar
+                            <Link to="/project" className='myPoppinsFont'>
+                                Project
                             </Link>
 
                         </li>

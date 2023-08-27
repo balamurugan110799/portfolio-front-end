@@ -188,6 +188,7 @@ function Navbar() {
                     state={toggle}
                     title={action}
                 >
+                    
                     <InputBox
                         label="Nav Name"
                         placeholder="Enter the Nav name"
