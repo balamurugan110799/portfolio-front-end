@@ -141,6 +141,24 @@ export default function Home() {
         }
     ]
 
+    const githubClick =(v,i) =>{
+        let values = {
+            preview_count_flag:true,
+            heart_likes_count:false
+        }
+
+        console.log(values)
+        var element = document.getElementById(`${v?._id}`).style.fill = "#FF0000"
+        console.log(document.getElementById(`${v?.title}`))
+        axios.put(`http://localhost:4000/api/updateProject/${v._id}`,values)
+        .then((res)=>{
+            getProjectData()
+        })
+        .catch((err)=>{
+            alert("error")
+        })
+    }
+
     const heartClick = (v,i) =>{
         let values = {
             heart_likes_count:true
@@ -356,7 +374,7 @@ export default function Home() {
 
                                 <div className=' my-4'>
                                     <div className=' flex'>
-                                        <RiGithubLine className=' text-h5 mr-2 hover:text-active-color cursor-pointer' />
+                                        <RiGithubLine id={v?._id} onClick={()=>githubClick(v,i)} className=' text-h5 mr-4 hover:text-active-color cursor-pointer' />
                                         <RiHeartLine id={v?.title} onClick={()=>heartClick(v,i)} className={`  text-h5 hover:text-active-color cursor-pointer`} />
                                        <span className=' leading-[40px] text-[12px] text-active-color'>{v?.heart_likes}</span> 
                                     </div>

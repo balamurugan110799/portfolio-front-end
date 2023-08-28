@@ -12,6 +12,8 @@ export default function Project() {
     const [popUpState, setPopUpState] = useState(false)
     const [action, setAction] = useState("")
     const [vaild, setVaild] = useState(true)
+    const [vaildSubmit, setVaildSubmit] = useState(false)
+
     const [values, setValues] = useState({
         tag: "",
         title: "",
@@ -27,7 +29,7 @@ export default function Project() {
         preview_link: "",
         githab_links: "",
     })
-
+    const [options, setOptions] = useState(["challenge", "personal", "work"])
 
     const getProjectData = () => {
         axios.get("http://localhost:4000/api/projectGetAll")
@@ -45,6 +47,7 @@ export default function Project() {
             ...values,
             [name]: value
         })
+        console.log(values)
     }
 
     if (vaild === true) {
@@ -78,16 +81,16 @@ export default function Project() {
             errors.githab_links = true
         }
     }
-    const editProject = (v,i) => {
+    const editProject = (v, i) => {
         setValues(v)
-        
+
         setPopUpState(true)
         setAction("Update")
     }
 
-    const submitHandlerUpdate = () =>{
-        axios.put(`http://localhost:4000/api/updateProject/${values._id}`,values)
-            .then((res)=>{
+    const submitHandlerUpdate = () => {
+        axios.put(`http://localhost:4000/api/updateProject/${values._id}`, values)
+            .then((res) => {
                 alert("Submited")
                 getProjectData()
                 setPopUpState(false)
@@ -107,16 +110,46 @@ export default function Project() {
                     githab_links: "",
                 })
             })
-            .catch((err)=>{
+            .catch((err) => {
                 alert("error")
             })
     }
 
     const submitHandler = () => {
         console.log(values)
+
+        setVaildSubmit(true)
         if (errors.tag === true && errors.githab_links === true && errors.preview_link === true && errors.des === true && errors.title === true && errors.tag === true) {
-            axios.post("http://localhost:4000/api/AddProject",values)
-            .then((res)=>{
+            axios.post("http://localhost:4000/api/AddProject", values)
+                .then((res) => {
+                    getProjectData()
+                    setPopUpState(false)
+                    setValues({
+                        tag: "",
+                        title: "",
+                        des: "",
+                        preview_link: "",
+                        githab_links: "",
+                    })
+
+                    setErrors({
+                        tag: "",
+                        title: "",
+                        des: "",
+                        preview_link: "",
+                        githab_links: "",
+                    })
+                })
+                .catch((err) => {
+                    alert("error")
+                })
+
+        }
+    }
+    const deleteProject = (v, i) => {
+        axios.delete(`http://localhost:4000/api/deleteProject/${v._id}`)
+            .then((res) => {
+                alert("Submited")
                 getProjectData()
                 setPopUpState(false)
                 setValues({
@@ -135,37 +168,9 @@ export default function Project() {
                     githab_links: "",
                 })
             })
-            .catch((err)=>{
+            .catch((err) => {
                 alert("error")
             })
-    
-        }
-    }
-    const deleteProject = (v,i) => {
-        axios.delete(`http://localhost:4000/api/deleteProject/${v._id}`)
-        .then((res)=>{
-            alert("Submited")
-            getProjectData()
-            setPopUpState(false)
-            setValues({
-                tag: "",
-                title: "",
-                des: "",
-                preview_link: "",
-                githab_links: "",
-            })
-
-            setErrors({
-                tag: "",
-                title: "",
-                des: "",
-                preview_link: "",
-                githab_links: "",
-            })
-        })
-        .catch((err)=>{
-            alert("error")
-        })
     }
     const popUpHandler = () => {
         setPopUpState(!popUpState)
@@ -202,17 +207,23 @@ export default function Project() {
                     <div className='px-4 py-4'>
                         <div className=' grid grid-cols-2 gap-4'>
                             <div>
-                                <InputBox
-                                    label="Tag Name"
-                                    placeholder="Enter the Tag name"
-                                    className="w-full"
-                                    type="text"
-                                    name="tag"
+                            <label class="  myPoppinsFont text-dash-text-color font-semibold text-tiny ">Tag</label>
+                                <select
+                                    className="w-full mt-[2px]  myPoppinsFont h-[40px] border text-tiny border-[#ccc] p-2"
                                     value={values.tag}
+                                    name="tag"
+                                    onChange={(e) => handleChange(e)}
                                     id="tag"
-                                    handleChange={(e) => handleChange(e)}
-                                />
-                                {errors.tag}
+                                >
+                                    {options?.map((v, i) => {
+                                        return (
+                                            <option 
+                                           name="tag"  value={v}>{v}</option>
+                                        )
+                                    })}
+                                </select>
+
+                                {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.tag}</span> : null}
                             </div>
                             <div>
                                 <InputBox
@@ -225,6 +236,7 @@ export default function Project() {
                                     id="title"
                                     handleChange={(e) => handleChange(e)}
                                 />
+                                {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.title}</span> : null}
                             </div>
                             <div className='col-span-2'>
                                 <InputBox
@@ -237,6 +249,8 @@ export default function Project() {
                                     id="des"
                                     handleChange={(e) => handleChange(e)}
                                 />
+                                {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.des}</span> : null}
+
                             </div>
                             <div className=' col-span-2'>
                                 <InputBox
@@ -249,6 +263,7 @@ export default function Project() {
                                     id="preview_link"
                                     handleChange={(e) => handleChange(e)}
                                 />
+                                {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.preview_link}</span> : null}
                             </div>
                             <div className=' col-span-2'>
                                 <InputBox
@@ -261,6 +276,8 @@ export default function Project() {
                                     id="githab_links"
                                     handleChange={(e) => handleChange(e)}
                                 />
+                                {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.githab_links}</span> : null}
+
                             </div>
 
                         </div>
@@ -269,12 +286,12 @@ export default function Project() {
                                 Cancel
                             </button>
 
-                            {action==="Add" ? <button onClick={(e) => submitHandler(e)} className="bg-dashboard cursor-pointer mx-2 text-tiny py-1 hover:bg-dashboard-hover px-8 text-white">
+                            {action === "Add" ? <button onClick={(e) => submitHandler(e)} className="bg-dashboard cursor-pointer mx-2 text-tiny py-1 hover:bg-dashboard-hover px-8 text-white">
                                 Save
                             </button> : <button onClick={(e) => submitHandlerUpdate(e)} className="bg-dashboard cursor-pointer mx-2 text-tiny py-1 hover:bg-dashboard-hover px-8 text-white">
                                 Update
-                            </button> }
-                            
+                            </button>}
+
                         </div>
 
                     </div>
@@ -293,48 +310,48 @@ export default function Project() {
 
                 <table className='w-full'>
                     <tr className='py-2 bg-[#e3e3e3]'>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 ">
+                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
                             Index
                         </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 ">
+                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
                             Tag
                         </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 ">
+                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
                             title
                         </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 ">
+                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
                             des
                         </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 ">
+                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
                             preview_link
                         </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 ">
+                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
                             heart_likes
                         </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 ">
+                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
                             gitdab_links
                         </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 ">
+                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
                             gitlab_count
                         </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 "> Edit</td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 "> Delete</td>
+                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 "> Edit</td>
+                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 "> Delete</td>
                     </tr>
                     <tbody>
                         {data?.map((v, i) => {
-                 
+
                             return (
                                 <tr key={v._id}>
-                                    <td className='myPoppinsFont text-center text-base text-text-color py-1'>{i}</td>
-                                    <td className='myPoppinsFont text-center text-base text-text-color py-1'>{v?.tag}</td>
-                                    <td className='myPoppinsFont text-center text-base text-text-color py-1'>{v?.title}</td>
-                                    <td className='myPoppinsFont text-center text-base text-text-color py-1'>{v?.des}</td>
-                                    <td className='myPoppinsFont text-center text-base text-text-color py-1'>{v?.preview_link}</td>
-                                    <td className='myPoppinsFont text-center text-base text-text-color py-1'>{v?.heart_likes}</td>
-                                    <td className='myPoppinsFont text-center text-base text-text-color py-1'>{v?.githab_links}</td>
-                                    <td className='myPoppinsFont text-center text-base text-text-color py-1'>{v?.gitlab_count}</td>
+                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{i}</td>
+                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.tag}</td>
+                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.title}</td>
+                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.des}</td>
+                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.preview_link}</td>
+                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.heart_likes}</td>
+                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.githab_links}</td>
+                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.gitlab_count}</td>
 
-                                    <td className='myPoppinsFont text-center text-base text-text-color py-1'>
+                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>
                                         <RiEditBoxLine className='mx-auto cursor-pointer text-dashboard' onClick={() => editProject(v, i)} />
                                     </td>
                                     <td className='myPoppinsFont cursor-pointer  text-base py-1'>
