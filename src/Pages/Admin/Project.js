@@ -194,179 +194,188 @@ export default function Project() {
     return (
         <div>
             <Minlayout>
-                <PopUp
-                    state={popUpState}
-                    handleClick={popUpHandler}
-                    width={"lg"}
-                    // actionbar="fa"
-                    title={action}
-                // type={popup.type}
-                // message={popup.message}
-                // handleClick={popUpHandler}
-                >
-                    <div className='px-4 py-4'>
-                        <div className=' grid grid-cols-2 gap-4'>
-                            <div>
-                            <label class="  myPoppinsFont text-dash-text-color font-semibold text-tiny ">Tag</label>
-                                <select
-                                    className="w-full mt-[2px]  myPoppinsFont h-[40px] border text-tiny border-[#ccc] p-2"
-                                    value={values.tag}
-                                    name="tag"
-                                    onChange={(e) => handleChange(e)}
-                                    id="tag"
-                                >
-                                    {options?.map((v, i) => {
+                <div className='px-6'>
+
+                    <PopUp
+                        state={popUpState}
+                        handleClick={popUpHandler}
+                        width={"lg"}
+                        // actionbar="fa"
+                        title={action}
+                    // type={popup.type}
+                    // message={popup.message}
+                    // handleClick={popUpHandler}
+                    >
+                        <div className='px-4 py-4'>
+                            <div className=' grid grid-cols-2 gap-4'>
+                                <div>
+                                    <label class="  myPoppinsFont text-dash-text-color font-semibold text-tiny ">Tag</label>
+                                    <select
+                                        className="w-full mt-[2px]  myPoppinsFont h-[40px] border text-tiny border-[#ccc] p-2"
+                                        value={values.tag}
+                                        name="tag"
+                                        onChange={(e) => handleChange(e)}
+                                        id="tag"
+                                    >
+                                        {options?.map((v, i) => {
+                                            return (
+                                                <option
+                                                    name="tag" value={v}>{v}</option>
+                                            )
+                                        })}
+                                    </select>
+
+                                    {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.tag}</span> : null}
+                                </div>
+                                <div>
+                                    <InputBox
+                                        label="Title"
+                                        placeholder="Enter the Title"
+                                        className="w-full"
+                                        type="text"
+                                        name="title"
+                                        value={values.title}
+                                        id="title"
+                                        handleChange={(e) => handleChange(e)}
+                                    />
+                                    {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.title}</span> : null}
+                                </div>
+                                <div className='col-span-2'>
+                                    <InputBox
+                                        label="Description"
+                                        placeholder="Enter the description"
+                                        className="w-full"
+                                        type="text"
+                                        name="des"
+                                        value={values.des}
+                                        id="des"
+                                        handleChange={(e) => handleChange(e)}
+                                    />
+                                    {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.des}</span> : null}
+
+                                </div>
+                                <div className=' col-span-2'>
+                                    <InputBox
+                                        label="Preview Link"
+                                        placeholder="Enter the Preview Link"
+                                        className="w-full"
+                                        type="text"
+                                        name="preview_link"
+                                        value={values.preview_link}
+                                        id="preview_link"
+                                        handleChange={(e) => handleChange(e)}
+                                    />
+                                    {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.preview_link}</span> : null}
+                                </div>
+                                <div className=' col-span-2'>
+                                    <InputBox
+                                        label=" Githab Links"
+                                        placeholder="Enter the Githab Links"
+                                        className="w-full"
+                                        type="text"
+                                        name="githab_links"
+                                        value={values.githab_links}
+                                        id="githab_links"
+                                        handleChange={(e) => handleChange(e)}
+                                    />
+                                    {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.githab_links}</span> : null}
+
+                                </div>
+
+                            </div>
+                            <div className=' flex justify-end pt-4'>
+                                <button onClick={popUpHandler} className="bg-dashboard cursor-pointer py-1  text-tiny hover:bg-dashboard-hover px-8 text-white">
+                                    Cancel
+                                </button>
+
+                                {action === "Add" ? <button onClick={(e) => submitHandler(e)} className="bg-dashboard cursor-pointer mx-2 text-tiny py-1 hover:bg-dashboard-hover px-8 text-white">
+                                    Save
+                                </button> : <button onClick={(e) => submitHandlerUpdate(e)} className="bg-dashboard cursor-pointer mx-2 text-tiny py-1 hover:bg-dashboard-hover px-8 text-white">
+                                    Update
+                                </button>}
+
+                            </div>
+
+                        </div>
+
+
+
+
+                    </PopUp>
+
+                    <ActionBar
+                        button_name="Add"
+                        event={() => toggleHandler()}
+                    >
+                    </ActionBar>
+                    <div className=''>
+
+
+                        <div className=''>
+
+
+                            <table className='w-full '>
+                                <tr className='py-2 bg-[#e3e3e3]'>
+                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
+                                        Index
+                                    </td>
+                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
+                                        Tag
+                                    </td>
+                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
+                                        title
+                                    </td>
+                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
+                                        des
+                                    </td>
+                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
+                                        preview_link
+                                    </td>
+                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
+                                        heart_likes
+                                    </td>
+                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
+                                        gitdab_links
+                                    </td>
+                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
+                                        gitlab_count
+                                    </td>
+                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 "> Edit</td>
+                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 "> Delete</td>
+                                </tr>
+                                <tbody>
+                                    {data?.map((v, i) => {
+
                                         return (
-                                            <option 
-                                           name="tag"  value={v}>{v}</option>
+                                            <tr key={v._id}>
+                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>{i}</td>
+                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>{v?.tag}</td>
+                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>{v?.title}</td>
+                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2 text-ellipsis overflow-hidden'><div class="overflow-hidden truncate w-[200px] myPoppinsFont text-left text-[14px] text-text-color">{v?.des}</div> </td>
+                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2 text-ellipsis overflow-hidden'><p className='text-ellipsis overflow-hidden  w-[200px] myPoppinsFont text-left text-[14px] text-text-color '>{v?.preview_link}</p> </td>
+                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>{v?.heart_likes}</td>
+                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2 text-ellipsis overflow-hidden'> <p className='text-ellipsis overflow-hidden  w-[200px] myPoppinsFont text-left text-[14px] text-text-color'>{v?.githab_links}</p> </td>
+                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>{v?.gitlab_count}</td>
+
+                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>
+                                                    <RiEditBoxLine className='mx-auto cursor-pointer text-dashboard' onClick={() => editProject(v, i)} />
+                                                </td>
+                                                <td className='myPoppinsFont cursor-pointer  text-base py-1'>
+                                                    <RiDeleteBin5Line onClick={() => deleteProject(v, i)} className='mx-auto text-[#ff593d] text-base' />
+                                                </td>
+                                            </tr>
+
                                         )
                                     })}
-                                </select>
+                                    <tr>
 
-                                {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.tag}</span> : null}
-                            </div>
-                            <div>
-                                <InputBox
-                                    label="Title"
-                                    placeholder="Enter the Title"
-                                    className="w-full"
-                                    type="text"
-                                    name="title"
-                                    value={values.title}
-                                    id="title"
-                                    handleChange={(e) => handleChange(e)}
-                                />
-                                {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.title}</span> : null}
-                            </div>
-                            <div className='col-span-2'>
-                                <InputBox
-                                    label="Description"
-                                    placeholder="Enter the description"
-                                    className="w-full"
-                                    type="text"
-                                    name="des"
-                                    value={values.des}
-                                    id="des"
-                                    handleChange={(e) => handleChange(e)}
-                                />
-                                {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.des}</span> : null}
-
-                            </div>
-                            <div className=' col-span-2'>
-                                <InputBox
-                                    label="Preview Link"
-                                    placeholder="Enter the Preview Link"
-                                    className="w-full"
-                                    type="text"
-                                    name="preview_link"
-                                    value={values.preview_link}
-                                    id="preview_link"
-                                    handleChange={(e) => handleChange(e)}
-                                />
-                                {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.preview_link}</span> : null}
-                            </div>
-                            <div className=' col-span-2'>
-                                <InputBox
-                                    label=" Githab Links"
-                                    placeholder="Enter the Githab Links"
-                                    className="w-full"
-                                    type="text"
-                                    name="githab_links"
-                                    value={values.githab_links}
-                                    id="githab_links"
-                                    handleChange={(e) => handleChange(e)}
-                                />
-                                {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.githab_links}</span> : null}
-
-                            </div>
-
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div className=' flex justify-end pt-4'>
-                            <button onClick={popUpHandler} className="bg-dashboard cursor-pointer py-1  text-tiny hover:bg-dashboard-hover px-8 text-white">
-                                Cancel
-                            </button>
-
-                            {action === "Add" ? <button onClick={(e) => submitHandler(e)} className="bg-dashboard cursor-pointer mx-2 text-tiny py-1 hover:bg-dashboard-hover px-8 text-white">
-                                Save
-                            </button> : <button onClick={(e) => submitHandlerUpdate(e)} className="bg-dashboard cursor-pointer mx-2 text-tiny py-1 hover:bg-dashboard-hover px-8 text-white">
-                                Update
-                            </button>}
-
-                        </div>
-
                     </div>
 
-
-
-
-                </PopUp>
-
-                <ActionBar
-                    button_name="Add"
-                    event={() => toggleHandler()}
-                >
-                </ActionBar>
-
-
-                <table className='w-full'>
-                    <tr className='py-2 bg-[#e3e3e3]'>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
-                            Index
-                        </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
-                            Tag
-                        </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
-                            title
-                        </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
-                            des
-                        </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
-                            preview_link
-                        </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
-                            heart_likes
-                        </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
-                            gitdab_links
-                        </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
-                            gitlab_count
-                        </td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 "> Edit</td>
-                        <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 "> Delete</td>
-                    </tr>
-                    <tbody>
-                        {data?.map((v, i) => {
-
-                            return (
-                                <tr key={v._id}>
-                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{i}</td>
-                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.tag}</td>
-                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.title}</td>
-                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.des}</td>
-                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.preview_link}</td>
-                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.heart_likes}</td>
-                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.githab_links}</td>
-                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>{v?.gitlab_count}</td>
-
-                                    <td className='myPoppinsFont text-left text-base text-text-color py-1'>
-                                        <RiEditBoxLine className='mx-auto cursor-pointer text-dashboard' onClick={() => editProject(v, i)} />
-                                    </td>
-                                    <td className='myPoppinsFont cursor-pointer  text-base py-1'>
-                                        <RiDeleteBin5Line onClick={() => deleteProject(v, i)} className='mx-auto text-[#ff593d] text-base' />
-                                    </td>
-                                </tr>
-
-                            )
-                        })}
-                        <tr>
-
-                        </tr>
-                    </tbody>
-                </table>
-
+                </div>
             </Minlayout>
         </div>
     )

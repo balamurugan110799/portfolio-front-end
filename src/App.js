@@ -15,7 +15,7 @@ function App() {
         <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/login" element={<Login/>} />
-        {localStorage.auth !== null && localStorage.auth !== undefined ? 
+        {sessionStorage.auth !== null && sessionStorage.auth !== undefined ? 
         
         
         <><Route path="/dashboard" element={<DashBoard />} /> <Route path="/navbar" element={<Navbar />} />

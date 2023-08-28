@@ -59,7 +59,7 @@ function Login() {
           // alert("Hello")
           console.log(res.data.token)
           const token = res.data.token
-          localStorage.setItem("auth", token)
+          sessionStorage.setItem("auth", token)
           navigate('/dashboard')
         
           dbMessage.password = ""
