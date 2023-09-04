@@ -18,7 +18,8 @@ function App() {
         {sessionStorage.auth !== null && sessionStorage.auth !== undefined ? 
         
         
-        <><Route path="/dashboard" element={<DashBoard />} /> <Route path="/navbar" element={<Navbar />} />
+        <><Route path="/dashboard" element={<DashBoard />} /> 
+        <Route path="/navbar" element={<Navbar />} />
         
         <Route path="/project" element={<Project />} />
         </>
