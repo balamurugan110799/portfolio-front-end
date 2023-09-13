@@ -11,7 +11,6 @@ function InputBox(props) {
                     id={props.id}
                     value={props.value}
                     className={` ${props.className}
-
                 myPoppinsFont border text-tiny mt-1 border-[#ccc] p-2`}
 
                     onChange={props.handleChange}

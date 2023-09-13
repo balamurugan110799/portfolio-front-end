@@ -13,6 +13,7 @@ export default function Project() {
     const [action, setAction] = useState("")
     const [vaild, setVaild] = useState(true)
     const [vaildSubmit, setVaildSubmit] = useState(false)
+    const [imgs, setImgs] = useState()
 
     const [values, setValues] = useState({
         tag: "",
@@ -20,6 +21,7 @@ export default function Project() {
         des: "",
         preview_link: "",
         githab_links: "",
+        img: "",
     })
 
     const [errors, setErrors] = useState({
@@ -28,6 +30,7 @@ export default function Project() {
         des: "",
         preview_link: "",
         githab_links: "",
+        img: "",
     })
     const [options, setOptions] = useState(["challenge", "personal", "work"])
 
@@ -43,6 +46,7 @@ export default function Project() {
     }
     const handleChange = (e) => {
         const { name, value } = e.target;
+        console.log(name, value)
         setValues({
             ...values,
             [name]: value
@@ -50,7 +54,24 @@ export default function Project() {
         console.log(values)
     }
 
+    const handleImage = (e) => {
+        console.log(e.target.files)
+        const data = new FileReader()
+        data.addEventListener('load', () => {
+            setImgs(data.result)
+        })
+        data.readAsDataURL(e.target.files[0])
+
+
+    }
+
+
+
     if (vaild === true) {
+        // console.log(imgs)
+        values.img = imgs
+
+        // console.log(typeof(imgs))
         if (values.tag === "" || values.tag === undefined) {
             errors.tag = "tag is required"
         } else {
@@ -75,20 +96,28 @@ export default function Project() {
             errors.preview_link = true
         }
 
-        if (values.githab_links === "" || values.githab_links === undefined) {
-            errors.githab_links = "preview link is required"
+        if (values.img === "" || values.img === undefined) {
+            errors.img = "Images is required"
         } else {
-            errors.githab_links = true
+            errors.img = true
         }
+        if (values.img === "" || values.img === undefined) {
+            errors.img = "Images is required"
+        } else {
+            errors.img = true
+        }
+        console.log(errors.img)
     }
     const editProject = (v, i) => {
         setValues(v)
-
         setPopUpState(true)
         setAction("Update")
     }
 
     const submitHandlerUpdate = () => {
+
+
+
         axios.put(`http://localhost:4000/api/updateProject/${values._id}`, values)
             .then((res) => {
                 alert("Submited")
@@ -99,7 +128,7 @@ export default function Project() {
                     title: "",
                     des: "",
                     preview_link: "",
-                    githab_links: "",
+                    img: "",
                 })
 
                 setErrors({
@@ -107,7 +136,7 @@ export default function Project() {
                     title: "",
                     des: "",
                     preview_link: "",
-                    githab_links: "",
+                    img: "",
                 })
             })
             .catch((err) => {
@@ -116,10 +145,15 @@ export default function Project() {
     }
 
     const submitHandler = () => {
+
         console.log(values)
+        console.log(errors)
+
+
 
         setVaildSubmit(true)
-        if (errors.tag === true && errors.githab_links === true && errors.preview_link === true && errors.des === true && errors.title === true && errors.tag === true) {
+        console.log(errors.tag === true && errors.preview_link === true && errors.des === true && errors.title === true && errors.tag === true)
+        if (errors.tag === true && errors.preview_link === true && errors.des === true && errors.title === true && errors.tag === true && errors.img === true) {
             axios.post("http://localhost:4000/api/AddProject", values)
                 .then((res) => {
                     getProjectData()
@@ -130,6 +164,7 @@ export default function Project() {
                         des: "",
                         preview_link: "",
                         githab_links: "",
+                        img: ""
                     })
 
                     setErrors({
@@ -138,6 +173,7 @@ export default function Project() {
                         des: "",
                         preview_link: "",
                         githab_links: "",
+                        img: ""
                     })
                 })
                 .catch((err) => {
@@ -158,6 +194,7 @@ export default function Project() {
                     des: "",
                     preview_link: "",
                     githab_links: "",
+                    img: ""
                 })
 
                 setErrors({
@@ -166,6 +203,7 @@ export default function Project() {
                     des: "",
                     preview_link: "",
                     githab_links: "",
+                    img: ""
                 })
             })
             .catch((err) => {
@@ -182,6 +220,7 @@ export default function Project() {
             des: "",
             preview_link: "",
             githab_links: "",
+            img: ""
         })
         setAction("Add")
         setPopUpState(true)
@@ -199,7 +238,7 @@ export default function Project() {
                     <PopUp
                         state={popUpState}
                         handleClick={popUpHandler}
-                        width={"lg"}
+                        width={"md"}
                         // actionbar="fa"
                         title={action}
                     // type={popup.type}
@@ -281,6 +320,46 @@ export default function Project() {
                                     {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.githab_links}</span> : null}
 
                                 </div>
+                                <div className=' col-span-1'>
+                                    <div>
+
+                                        <label className={`  myPoppinsFont text-dash-text-color h-[40px]  font-semibold text-tiny `}>Image</label>
+                                    </div>
+                                    {action === "Add" ? <input type='file'
+                                        label=" Images"
+                                        placeholder="Image"
+                                        className="myPoppinsFont border text-tiny mt-1 border-[#ccc] p-2"
+                                        name="img"
+                                        // value={values.img}
+                                        defaultValue={values.img}
+                                        id="img" onChange={handleImage} /> :
+                                       null
+                                    }
+                                     {action === "Update" ? <input type='file'
+                                        label=" Images"
+                                        placeholder="Image"
+                                        className="myPoppinsFont border text-tiny mt-1 border-[#ccc] p-2"
+                                        name="img"
+                                        // value={values.img}
+                                        defaultValue={values.img}
+                                        id="img" onChange={handleImage} /> :
+                                       null
+                                    }
+
+                                    {/* <img src={imgs} height="200px" width="200px" /> */}
+                                    {/* <InputBox
+                                        label=" Images"
+                                        placeholder="Image"
+                                        className="w-full"
+                                        type="file"
+                                        name="img"
+                                        value={values.img}
+                                        id="img"
+                                        handleChange={(e) => handleImage(e)}
+                                    /> */}
+                                    {vaildSubmit ? <span className=' text-[#cc3c3c] texy-[12px]'>{errors.img}</span> : null}
+
+                                </div>
 
                             </div>
                             <div className=' flex justify-end pt-4'>
@@ -340,6 +419,9 @@ export default function Project() {
                                     <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
                                         gitlab_count
                                     </td>
+                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
+                                        Image
+                                    </td>
                                     <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 "> Edit</td>
                                     <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 "> Delete</td>
                                 </tr>
@@ -356,7 +438,9 @@ export default function Project() {
                                                 <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>{v?.heart_likes}</td>
                                                 <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2 text-ellipsis overflow-hidden'> <p className='text-ellipsis overflow-hidden  w-[200px] myPoppinsFont text-left text-[14px] text-text-color'>{v?.githab_links}</p> </td>
                                                 <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>{v?.gitlab_count}</td>
-
+                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>
+                                                    <img src={v?.img} className=' h-[50px] w-[50px]' />
+                                                </td>
                                                 <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>
                                                     <RiEditBoxLine className='mx-auto cursor-pointer text-dashboard' onClick={() => editProject(v, i)} />
                                                 </td>

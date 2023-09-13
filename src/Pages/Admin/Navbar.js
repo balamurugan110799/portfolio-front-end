@@ -211,6 +211,7 @@ function Navbar() {
                         handleChange={(e) => handleChange(e)}
                     />
                     {dataVal ? <span className='text-error text-sm'> {errors.url}</span> : null}
+              
                     {action === "Add" ? <div className="flex justify-end px-4 pt-3 ">
                         <Button name="Cancel" className="mx-2" onClick={() => toggleHandler()} />
                         <Button name="Add" onClick={handleSubmit} />

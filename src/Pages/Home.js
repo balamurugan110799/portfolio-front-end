@@ -8,6 +8,7 @@ import artsign from "../Components/Assets/Images/art-sign.png"
 import { IconNameCgArrowsScrollV } from "react-icons/cg";
 import profile from "../Components/Assets/Images/bala.png"
 import { RiCodeSSlashLine, RiArrowRightUpLine, RiHeartLine, RiGithubLine, RiLinkedinLine, RiMailSendLine } from "react-icons/ri";
+import { HiMiniArrowLongDown } from "react-icons/hi2";
 import about from "../Components/Assets/Images/about-bala.png"
 import { PiTelegramLogoLight } from "react-icons/pi";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -30,52 +31,52 @@ import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 // import './styles.css';
 
 export default function Home() {
-    const [data,setData]=useState({
-        name:"",
-        email:"",
-        subject:"",
-        message:""
+    const [data, setData] = useState({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
     })
 
-    const [project,setProject] =useState()
+    const [project, setProject] = useState()
 
-    const [errors,setErrors]=useState({
-        name:"",
-        email:"",
-        subject:"",
-        message:""
+    const [errors, setErrors] = useState({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
     })
 
-    const [count,setCount] =useState(false)
-    const [fnProject,setfnProject]=useState()
+    const [count, setCount] = useState(false)
+    const [fnProject, setfnProject] = useState()
 
     const [darkMode, setDarkMode] = useState(false)
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const [vaild,setvaild]=useState(true)
+    const [vaild, setvaild] = useState(true)
     const handleDrakMode = () => {
         setDarkMode(!darkMode)
     }
 
-    const handleChange =(e)=>{
-        const {name,value} = e.target;
+    const handleChange = (e) => {
+        const { name, value } = e.target;
         setData({
             ...data,
-            [name]:value,
+            [name]: value,
         })
     }
 
-    if(vaild===true){
+    if (vaild === true) {
         let regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-        if(data.name==="" || data.name===undefined){
+        if (data.name === "" || data.name === undefined) {
             errors.name = "Enter the Name"
-        }else{
-            errors.name= true
+        } else {
+            errors.name = true
         }
 
-        if(data.subject==="" || data.subject===undefined){
+        if (data.subject === "" || data.subject === undefined) {
             errors.subject = "Enter the Subject"
-        }else{
-            errors.subject= true
+        } else {
+            errors.subject = true
         }
 
         if (data.email === "" || data.email === undefined) {
@@ -99,19 +100,19 @@ export default function Home() {
                 console.log(err)
             })
     }
-    useEffect(()=>{
+    useEffect(() => {
         getProjectData()
-    },[])
+    }, [])
 
-    const handleClick= (e)=>{
+    const handleClick = (e) => {
         e.preventDefault();
         console.log(data)
         console.log(errors)
-        if(errors.name===true && errors.email===true && errors.subject===true){
+        if (errors.name === true && errors.email === true && errors.subject === true) {
 
             alert("Submited")
         }
-        
+
     }
     const nav = [
         {
@@ -141,38 +142,38 @@ export default function Home() {
         }
     ]
 
-    const githubClick =(v,i) =>{
+    const githubClick = (v, i) => {
         let values = {
-            preview_count_flag:true,
-            heart_likes_count:false
+            preview_count_flag: true,
+            heart_likes_count: false
         }
 
         console.log(values)
         var element = document.getElementById(`${v?._id}`).style.fill = "#FF0000"
         console.log(document.getElementById(`${v?.title}`))
-        axios.put(`http://localhost:4000/api/updateProject/${v._id}`,values)
-        .then((res)=>{
-            getProjectData()
-        })
-        .catch((err)=>{
-            alert("error")
-        })
+        axios.put(`http://localhost:4000/api/updateProject/${v._id}`, values)
+            .then((res) => {
+                getProjectData()
+            })
+            .catch((err) => {
+                alert("error")
+            })
     }
 
-    const heartClick = (v,i) =>{
+    const heartClick = (v, i) => {
         let values = {
-            heart_likes_count:true
+            heart_likes_count: true
         }
         var element = document.getElementById(`${v?.title}`).style.fill = "#FF0000"
         console.log(document.getElementById(`${v?.title}`))
-                setCount(true)
-        axios.put(`http://localhost:4000/api/updateProject/${v._id}`,values)
-        .then((res)=>{
-            getProjectData()
-        })
-        .catch((err)=>{
-            alert("error")
-        })
+        setCount(true)
+        axios.put(`http://localhost:4000/api/updateProject/${v._id}`, values)
+            .then((res) => {
+                getProjectData()
+            })
+            .catch((err) => {
+                alert("error")
+            })
     }
 
     return (
@@ -231,7 +232,8 @@ export default function Home() {
                             </div>
                             <div className=' lg:visible md:hidden xl:visible visible lgmd:visible mdsm:visible sm:hidden '>Hello</div>
                             <div className='  grid grid-cols-2'>
-                                <div className='sm:hidden absolute bottom-[100px] left-0 bg-primary h-[40px] w-[40px]'>
+                                <div className='sm:hidden flex absolute bottom-[100px] tracking-wider duration-300 hover:tracking-widest hover:bg-active-color left-0 bg-primary h-[40px] py-2 text-white px-10 cursor-pointer'>
+                                    <HiMiniArrowLongDown className=' text-h5 text-white mt-1 mr-2' />  Resume
                                 </div>
                                 <div className='absolute bottom-[70px] right-0 sm:hidden'>
                                     <img src={artsign} />
@@ -293,10 +295,11 @@ export default function Home() {
                                 </div>
                             </div>
                             <div className=' text-h2 py-4'>
-                                Web development
+                                Web Design
                             </div>
                             <p className=' text-text-color sm:text-base'>
-                                Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
+                                I believe web design can be more diverse and inspiring. With a mission to present the possibilities of web design,
+                                I am pursuing new expressions through experiments and thoughts.
                             </p>
                         </div>
 
@@ -307,10 +310,10 @@ export default function Home() {
                                 </div>
                             </div>
                             <div className=' text-h2 py-4'>
-                                Web development
+                                Frontend Development
                             </div>
                             <p className=' text-text-color'>
-                                Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
+                            I like to code things from scratch, and enjoy bringing ideas to life in the browser.
                             </p>
                         </div>
 
@@ -321,7 +324,7 @@ export default function Home() {
                                 </div>
                             </div>
                             <div className=' text-h2 py-4'>
-                                Web development
+                                Backend Support
                             </div>
                             <p className=' text-text-color'>
                                 Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
@@ -339,69 +342,69 @@ export default function Home() {
                 <div className=' container mx-auto pt-8 sm:pb-16'>
                     <div className={` text-primary text-[44px] text-center sm:text-[34px]  sm:pt-8 `}>Project </div>
 
-                 
+
                     <div className=' grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 lgmd:grid-cols-3 sm:grid-cols-1 gap-16 py-10'>
-                      
-                    {fnProject?.map((v,i)=>{
-                        return(
-                            <div key={v?._id}>
-                                  <div className=' group'>
-                            <div className='relative'>
-                                <img src="https://images.pexels.com/photos/2312369/pexels-photo-2312369.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-                                <div className={`  h-[50px] absolute w-[50px] bg-primary group cursor-pointer hover:bg-active-color duration-300 center right-6 bottom-[-20px]`}>
-                                    <a href={v?.preview_link} target='_blank'>
 
-                                    <RiArrowRightUpLine className=' text-h2 text-white group-hover:text-white' />
-                                    </a>
-                                </div>
-                            </div>
-                            <div>
-                                <div className=' flex'>
-                                    <div className=' bg-black h-[3px] w-[30px] mt-8'>
+                        {fnProject?.map((v, i) => {
+                            return (
+                                <div key={v?._id}>
+                                    <div className=' group'>
+                                        <div className='relative'>
+                                            <img src={v?.img} className=' h-[300px] w-[100%] object-cover' />
+                                            <div className={`  h-[50px] absolute w-[50px] bg-primary group cursor-pointer hover:bg-active-color duration-300 center right-6 bottom-[-20px]`}>
+                                                <a href={v?.preview_link} target='_blank'>
 
+                                                    <RiArrowRightUpLine className=' text-h2 text-white group-hover:text-white' />
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className=' flex'>
+                                                <div className=' bg-black h-[3px] w-[30px] mt-8'>
+
+                                                </div>
+                                                <div className=' pt-5 px-4 leading-[26px]  text-black text-[14px]'>
+                                                    {v?.tag}
+                                                </div>
+                                            </div>
+
+                                            <div className=' pt-2 text-h2 group-hover:text-active-color duration-300'>
+                                                {v?.title}
+                                            </div>
+                                            <p className=' text-text-color pt-2'>
+                                                {v?.des}
+                                            </p>
+
+                                            <div className=' my-4'>
+                                                <div className=' flex'>
+                                                    <RiGithubLine id={v?._id} onClick={() => githubClick(v, i)} className=' text-h5 mr-4 hover:text-active-color cursor-pointer' />
+                                                    <RiHeartLine id={v?.title} onClick={() => heartClick(v, i)} className={`  text-h5 hover:text-active-color cursor-pointer`} />
+                                                    <span className=' leading-[40px] text-[12px] text-active-color'>{v?.heart_likes}</span>
+                                                </div>
+
+                                            </div>
+
+                                            <div>
+
+                                            </div>
+
+
+                                        </div>
                                     </div>
-                                    <div className=' pt-5 px-4 leading-[26px]  text-black text-[14px]'>
-                                        {v?.tag}
-                                    </div>
                                 </div>
+                            )
+                        })}
 
-                                <div className=' pt-2 text-h2 group-hover:text-active-color duration-300'>
-                                    {v?.title}
-                                </div>
-                                <p className=' text-text-color pt-2'>
-                                    {v?.des}
-                                </p>
-
-                                <div className=' my-4'>
-                                    <div className=' flex'>
-                                        <RiGithubLine id={v?._id} onClick={()=>githubClick(v,i)} className=' text-h5 mr-4 hover:text-active-color cursor-pointer' />
-                                        <RiHeartLine id={v?.title} onClick={()=>heartClick(v,i)} className={`  text-h5 hover:text-active-color cursor-pointer`} />
-                                       <span className=' leading-[40px] text-[12px] text-active-color'>{v?.heart_likes}</span> 
-                                    </div>
-
-                                </div>
-
-                                <div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-                            </div>
-                        )
-                    })}
-                       
                     </div>
                 </div>
 
             </section>
 
             <section className='  '>
-                <div className=' flex w-[100%] md:block lg:flex sm:block'>
-                    <div className=' lg:w-[45%] md:w-[100%] sm:w-[100%] relative py-16 sm:pb-0'>
+                <div className=' flex w-[100%] md:block mdsm:block lg:flex sm:block'>
+                    <div className=' lg:w-[45%] md:w-[100%] mdsm:w-[100%]  sm:w-[100%] relative py-16 sm:pb-0'>
 
-                        <div className='lg:w-[60%] md:w-[100%] sm:w-[100%] pt-10 right-[-40px] absolute sm:right-0 sm:relative'>
+                        <div className='lg:w-[60%] md:w-[100%] sm:w-[100%] pt-10 md:right-[-0px] mdsm:right-[-0px] lg:right-[-40px] md:relative mdsm:relative lg:absolute sm:right-0 sm:relative'>
                             <div className=' p-6 border-b-4 border-active-color  bg-secondary '>
 
 
@@ -410,7 +413,7 @@ export default function Home() {
                                     <img src={diamond} className='mx-6' />
                                 </div>
                                 <div className=' relative'>
-                                    <div className={` absolute left-[-60px] sm:relative  sm:left-0 text-primary text-[44px] text-center  `}>Contact Me.</div>
+                                    <div className={`  md:relative mdsm:relative lg:absolute left-[-60px] sm:relative  sm:left-0 text-primary text-[44px] text-center  `}>Contact Me.</div>
 
                                     <p className='pt-[100px] px-6 text-text-color'>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</p>
                                     <p className='pt-6 pb-10 px-6 text-text-color'>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</p>
@@ -423,7 +426,7 @@ export default function Home() {
                                     <RiMailSendLine className=' text-text-color group-hover:text-white text-h3 duration-300' />
                                 </div>
                                 <div className=' mr-4 h-[40px] w-[50px] group hover:bg-active-color duration-300 cursor-pointer bg-secondary center'>
-                                    <RiLinkedinLine  className=' text-text-color group-hover:text-white text-h3 duration-300' />
+                                    <RiLinkedinLine className=' text-text-color group-hover:text-white text-h3 duration-300' />
                                 </div>
 
                             </div>
@@ -444,29 +447,29 @@ export default function Home() {
                             <form>
                                 <div className=' grid grid-cols-2 sm:grid-cols-1  pt-8 pb-8'>
                                     <div className=' '>
-                                        <input onChange={(e)=>handleChange(e)} name="name" type="text" id="name" placeholder='Name ' className=' placeholder:text-white bg-[black] text-[white]  font-light tracking-wide w-[95%] border-[1px] py-2 px-4 sm:w-[100%] sm:mb-8 border-[white]' />
+                                        <input onChange={(e) => handleChange(e)} name="name" type="text" id="name" placeholder='Name ' className=' placeholder:text-white bg-[black] text-[white]  font-light tracking-wide w-[95%] border-[1px] py-2 px-4 sm:w-[100%] sm:mb-8 border-[white]' />
 
                                     </div>
                                     <div>
-                                        <input onChange={(e)=>handleChange(e)} name="email" type="text" id="email" placeholder='Email ' className=' placeholder:text-white  bg-[black] text-[white]   w-full border-[1px] py-2 px-4  border-[white]' />
+                                        <input onChange={(e) => handleChange(e)} name="email" type="text" id="email" placeholder='Email ' className=' placeholder:text-white  bg-[black] text-[white]   w-full border-[1px] py-2 px-4  border-[white]' />
                                     </div>
 
 
                                 </div>
                                 <div className=' pb-8'>
-                                    <input onChange={(e)=>handleChange(e)} name="subject" type="text" id="subject" placeholder='Subject ' className='placeholder:text-white   bg-[black] text-[white]   w-full border-[1px] py-2 px-4   border-[white]' />
+                                    <input onChange={(e) => handleChange(e)} name="subject" type="text" id="subject" placeholder='Subject ' className='placeholder:text-white   bg-[black] text-[white]   w-full border-[1px] py-2 px-4   border-[white]' />
 
                                 </div>
 
                                 <div className=' pb-8'>
-                                    <textarea onChange={(e)=>handleChange(e)} name="message" type="text" id="message" placeholder='Message ' className=' placeholder:text-white  h-[120px] bg-[black] text-[white]   w-full border-[1px] py-2 px-4   border-[white]' />
+                                    <textarea onChange={(e) => handleChange(e)} name="message" type="text" id="message" placeholder='Message ' className=' placeholder:text-white  h-[120px] bg-[black] text-[white]   w-full border-[1px] py-2 px-4   border-[white]' />
 
                                 </div>
 
                                 <div>
 
                                 </div>
-                                <button onClick={(e)=>handleClick(e)} className=' flex group bg-active-color text-white  hover:text-active-color  center py-4  cursor-pointer  hover:bg-white duration-300   px-10'><PiTelegramLogoLight className='mx-2 text-h5 group-hover:text-active-color' /> Contact Me</button>
+                                <button onClick={(e) => handleClick(e)} className=' flex group bg-active-color text-white  hover:text-active-color  center py-4  cursor-pointer  hover:bg-white duration-300   px-10'><PiTelegramLogoLight className='mx-2 text-h5 group-hover:text-active-color' /> Contact Me</button>
                             </form>
 
                         </div>
