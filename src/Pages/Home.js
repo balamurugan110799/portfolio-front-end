@@ -5,6 +5,8 @@ import axios from 'axios'
 import Arrow from "../Components/Assets/Images/arrow.png"
 import diamond from "../Components/Assets/Images/diamond.png"
 import artsign from "../Components/Assets/Images/art-sign.png"
+import pdf from "../Components/Assets/Images/Balamurugan.pdf"
+
 import { IconNameCgArrowsScrollV } from "react-icons/cg";
 import profile from "../Components/Assets/Images/bala.png"
 import { RiCodeSSlashLine, RiArrowRightUpLine, RiHeartLine, RiGithubLine, RiLinkedinLine, RiMailSendLine } from "react-icons/ri";
@@ -121,22 +123,22 @@ export default function Home() {
                 {
                     id: 0,
                     name: "Home",
-                    url_link: "home"
+                    url_link: "#home"
                 },
                 {
                     id: 1,
                     name: "About",
-                    url_link: "about"
+                    url_link: "#about"
                 },
                 {
                     id: 2,
-                    name: "Services",
-                    url_link: "services"
+                    name: "Working",
+                    url_link: "#working"
                 },
                 {
                     id: 3,
                     name: "Project",
-                    url_link: "project"
+                    url_link: "#project"
                 },
             ]
         }
@@ -194,16 +196,18 @@ export default function Home() {
                                         {v?.nav_list.map((nav) => {
                                             return (
                                                 <div className={`${darkMode}  center `}>
+                                                    <a href={nav?.url_link}>
 
-                                                    <div className={`${darkMode ? "text-white" : ""} text-text-color px-10 hover:text-black duration-300 cursor-pointer`}>{nav?.name}</div>
+                                            
+                                                    <div className={`${darkMode ? "text-white" : ""} text-text-color px-10 hover:text-black duration-300 cursor-pointer`}>{nav?.name}</div>        </a>
                                                 </div>
                                             )
                                         })}
 
                                         <div className='col-span-2'>
-                                            <div className={`${darkMode ? "bg-white" : "bg-primary text-white  "}  center py-4 px-10  cursor-pointer  hover:bg-active-color duration-300 mx-4 `}>
+                                          <a href={"#contact"}> <div className={`${darkMode ? "bg-white" : "bg-primary text-white  "}  center py-4 px-10  cursor-pointer  hover:bg-active-color duration-300 mx-4 `}>
                                                 Contact
-                                            </div>
+                                            </div></a> 
                                         </div>
                                     </div>
                                 </div>
@@ -215,7 +219,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className='pt-[150px] container mx-auto '>
+            <section id="home" className='pt-[150px] container mx-auto '>
                 <div className=' grid grid-cols-2 pb-[120px] md:grid-cols-1 lg:grid-cols-2  lgmd:grid-cols-2  sm:grid-cols-1 sm:px-2'>
                     <div className='relative h-full'>
                         <div className='grid  pt-[90px] grid-cols-3 relative '>
@@ -232,9 +236,9 @@ export default function Home() {
                             </div>
                             <div className=' lg:visible md:hidden xl:visible visible lgmd:visible mdsm:visible sm:hidden '>Hello</div>
                             <div className='  grid grid-cols-2'>
-                                <div className='sm:hidden flex absolute bottom-[100px] tracking-wider duration-300 hover:tracking-widest hover:bg-active-color left-0 bg-primary h-[40px] py-2 text-white px-10 cursor-pointer'>
+                               <a href={pdf} download><div className='sm:hidden flex absolute bottom-[100px] tracking-wider duration-300 hover:tracking-widest hover:bg-active-color left-0 bg-primary h-[40px] py-2 text-white px-10 cursor-pointer'>
                                     <HiMiniArrowLongDown className=' text-h5 text-white mt-1 mr-2' />  Resume
-                                </div>
+                                </div></a> 
                                 <div className='absolute bottom-[70px] right-0 sm:hidden'>
                                     <img src={artsign} />
                                 </div>
@@ -247,7 +251,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className=' bg-secondary py-16 sm:px-2 sm:pb-0'>
+            <section id="about"  className=' bg-secondary py-16 sm:px-2 sm:pb-0'>
                 <div className='  py-10 container mx-auto sm:pb-0'>
                     <div className=' grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2  lgmd:grid-cols-2 py-8 sm:grid-cols-1'>
 
@@ -264,6 +268,7 @@ export default function Home() {
                                 <div className='h-[2px] mt-4 w-[60px] bg-[#222]'>
 
                                 </div>
+                               
                                 <div className={` text-h2 text-text-color px-4 sm:text-h4`}>
                                     Passionate about creating Web Pages with UI/UX User Interface. I have a year of experience and many client are happy with the project carried out.
                                 </div>
@@ -274,7 +279,8 @@ export default function Home() {
                                     My SKill Are : <span className='text-text-color'>HTML, CSS, JavaScript, Jquery, React JS, Redux, Tailwind CSS, Bootstrap, JSON,  API Intergation and Github </span>
                                 </div>
                             </div>
-                            <button className='mx-10 sm:mx-4  my-10 flex group bg-primary text-white    center py-4  cursor-pointer  hover:bg-active-color duration-300   px-10'><PiTelegramLogoLight className='mx-2 text-h5 ' /> Contact Me</button>
+                            <a href={'#contact'}>
+                            <button className='mx-10 sm:mx-4  my-10 flex group bg-primary text-white    center py-4  cursor-pointer  hover:bg-active-color duration-300   px-10'><PiTelegramLogoLight className='mx-2 text-h5 ' /> Contact Me</button></a>
 
                         </div>
 
@@ -284,7 +290,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className='py-8 sm:p-2'>
+            <section id="working" className='py-8 sm:p-2'>
                 <div className=' container mx-auto py-16  sm:pb-0'>
                     <div className={` text-primary text-[44px] sm:text-[34px] text-center sm:pt-8  `}>Working On</div>
                     <div className=' grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 lgmd:grid-cols-3 sm:grid-cols-1 gap-16  pt-16'>
@@ -313,6 +319,7 @@ export default function Home() {
                                 Frontend Development
                             </div>
                             <p className=' text-text-color'>
+                            Delivering highly executed front-end user experiences by paying close attention to optimization, and performance.
                             I like to code things from scratch, and enjoy bringing ideas to life in the browser.
                             </p>
                         </div>
@@ -338,7 +345,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className='bg-secondary py-16 sm:p-2 sm:pb-10'>
+            <section id="project" className='bg-secondary py-16 sm:p-2 sm:pb-10'>
                 <div className=' container mx-auto pt-8 sm:pb-16'>
                     <div className={` text-primary text-[44px] text-center sm:text-[34px]  sm:pt-8 `}>Project </div>
 
@@ -400,7 +407,7 @@ export default function Home() {
 
             </section>
 
-            <section className='  '>
+            <section id="contact" className='  '>
                 <div className=' flex w-[100%] md:block mdsm:block lg:flex sm:block'>
                     <div className=' lg:w-[45%] md:w-[100%] mdsm:w-[100%]  sm:w-[100%] relative py-16 sm:pb-0'>
 
@@ -490,11 +497,11 @@ export default function Home() {
                                 <p className=' text-text-color sm:pb-4 '>  balamurugan99711@gmail.com</p>
                             </div>
                             <div className=' flex justify-end sm:p-2 sm:flex-wrap sm:justify-start'>
-                                <div className=' text-text-color px-6 sm:w-[48%] sm:px-0 hover:text-white cursor-pointer duration-300 sm:pb-4'>Home</div>
-                                <div className=' text-text-color px-6 sm:w-[48%] sm:px-0 hover:text-white cursor-pointer duration-300 sm:pb-4'>About</div>
+                                <a href="#home"><div className=' text-text-color px-6 sm:w-[48%] sm:px-0 hover:text-white cursor-pointer duration-300 sm:pb-4'>Home</div></a>
+                                <a href="#about"><div className=' text-text-color px-6 sm:w-[48%] sm:px-0 hover:text-white cursor-pointer duration-300 sm:pb-4'>About</div></a>
 
-                                <div className=' text-text-color px-6 sm:w-[48%] sm:px-0 hover:text-white cursor-pointer duration-300 sm:pb-4'>Working on</div>
-                                <div className=' text-text-color px-6 sm:w-[48%] sm:px-0 hover:text-white cursor-pointer duration-300 sm:pb-4'>Project</div>
+                                <a href="#working"><div className=' text-text-color px-6 sm:w-[48%] sm:px-0 hover:text-white cursor-pointer duration-300 sm:pb-4'>Working on</div></a>
+                                <a href="#project"><div className=' text-text-color px-6 sm:w-[48%] sm:px-0 hover:text-white cursor-pointer duration-300 sm:pb-4'>Project</div></a>
                             </div>
 
                         </div>
