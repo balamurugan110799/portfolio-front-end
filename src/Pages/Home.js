@@ -499,7 +499,6 @@ export default function Home() {
                             <div className=' flex justify-end sm:p-2 sm:flex-wrap sm:justify-start'>
                                 <a href="#home"><div className=' text-text-color px-6 sm:w-[48%] sm:px-0 hover:text-white cursor-pointer duration-300 sm:pb-4'>Home</div></a>
                                 <a href="#about"><div className=' text-text-color px-6 sm:w-[48%] sm:px-0 hover:text-white cursor-pointer duration-300 sm:pb-4'>About</div></a>
-
                                 <a href="#working"><div className=' text-text-color px-6 sm:w-[48%] sm:px-0 hover:text-white cursor-pointer duration-300 sm:pb-4'>Working on</div></a>
                                 <a href="#project"><div className=' text-text-color px-6 sm:w-[48%] sm:px-0 hover:text-white cursor-pointer duration-300 sm:pb-4'>Project</div></a>
                             </div>

@@ -60,6 +60,7 @@ function Login() {
           console.log(res.data.token)
           const token = res.data.token
           sessionStorage.setItem("auth", token)
+          window.location.href="/dashboard"
           navigate('/dashboard')
         
           dbMessage.password = ""
