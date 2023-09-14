@@ -62,16 +62,14 @@ export default function Project() {
         })
         data.readAsDataURL(e.target.files[0])
 
-
     }
 
 
 
     if (vaild === true) {
         // console.log(imgs)
-        values.img = imgs
-
         // console.log(typeof(imgs))
+        values.img = imgs
         if (values.tag === "" || values.tag === undefined) {
             errors.tag = "tag is required"
         } else {
@@ -109,9 +107,11 @@ export default function Project() {
         console.log(errors.img)
     }
     const editProject = (v, i) => {
-        setValues(v)
+        values.img = v?.img
         setPopUpState(true)
         setAction("Update")
+        setValues(v)
+        setImgs("")
     }
 
     const submitHandlerUpdate = () => {
@@ -130,6 +130,7 @@ export default function Project() {
                     preview_link: "",
                     img: "",
                 })
+                setImgs("")
 
                 setErrors({
                     tag: "",
@@ -145,12 +146,8 @@ export default function Project() {
     }
 
     const submitHandler = () => {
-
         console.log(values)
         console.log(errors)
-
-
-
         setVaildSubmit(true)
         console.log(errors.tag === true && errors.preview_link === true && errors.des === true && errors.title === true && errors.tag === true)
         if (errors.tag === true && errors.preview_link === true && errors.des === true && errors.title === true && errors.tag === true && errors.img === true) {
@@ -166,7 +163,7 @@ export default function Project() {
                         githab_links: "",
                         img: ""
                     })
-
+                    setImgs("")
                     setErrors({
                         tag: "",
                         title: "",
@@ -179,7 +176,6 @@ export default function Project() {
                 .catch((err) => {
                     alert("error")
                 })
-
         }
     }
     const deleteProject = (v, i) => {
@@ -196,7 +192,7 @@ export default function Project() {
                     githab_links: "",
                     img: ""
                 })
-
+                setImgs("")
                 setErrors({
                     tag: "",
                     title: "",
@@ -224,6 +220,7 @@ export default function Project() {
         })
         setAction("Add")
         setPopUpState(true)
+        alert("Hello")
     }
 
     useEffect(() => {
@@ -325,25 +322,27 @@ export default function Project() {
 
                                         <label className={`  myPoppinsFont text-dash-text-color h-[40px]  font-semibold text-tiny `}>Image</label>
                                     </div>
-                                    {action === "Add" ? <input type='file'
-                                        label=" Images"
-                                        placeholder="Image"
-                                        className="myPoppinsFont border text-tiny mt-1 border-[#ccc] p-2"
-                                        name="img"
-                                        // value={values.img}
-                                        defaultValue={values.img}
-                                        id="img" onChange={handleImage} /> :
-                                       null
+                                    {action === "Add" ?
+                                        <input type='file'
+                                            label=" Images"
+                                            placeholder="Image"
+                                            className="myPoppinsFont border text-tiny mt-1 border-[#ccc] p-2"
+                                            name="img"
+                                            // value={values.img}
+                                            defaultValue={values.img}
+                                            id="img" onChange={handleImage} /> :
+                                        null
                                     }
-                                     {action === "Update" ? <input type='file'
-                                        label=" Images"
-                                        placeholder="Image"
-                                        className="myPoppinsFont border text-tiny mt-1 border-[#ccc] p-2"
-                                        name="img"
-                                        // value={values.img}
-                                        defaultValue={values.img}
-                                        id="img" onChange={handleImage} /> :
-                                       null
+                                    {action === "Update" ?
+                                        <input type='file'
+                                            label=" Images"
+                                            placeholder="Image"
+                                            className="myPoppinsFont border text-tiny mt-1 border-[#ccc] p-2"
+                                            name="img"
+                                            // value={values.img}
+                                            defaultValue={values.img}
+                                            id="img2" onChange={handleImage} /> :
+                                        null
                                     }
 
                                     {/* <img src={imgs} height="200px" width="200px" /> */}
