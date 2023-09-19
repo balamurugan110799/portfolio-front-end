@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Minlayout from '../../Components/Layout/Min-layout'
 import axios from 'axios'
 import { RiEditBoxLine, RiDeleteBin5Line } from "react-icons/ri";
-import ActionPopUp from '../../Components/Fields/ActionPopUp';
 import PopUp from '../../Components/Layout/PopUp';
 import ActionBar from '../../Components/Layout/ActionBar';
 import InputBox from '../../Components/Fields/InputBox';
+import Loader from '../../Components/Layout/Loader';
 
 export default function Project() {
     const [data, setData] = useState()
@@ -14,6 +14,7 @@ export default function Project() {
     const [vaild, setVaild] = useState(true)
     const [vaildSubmit, setVaildSubmit] = useState(false)
     const [imgs, setImgs] = useState()
+    const [loader,setLoader] =useState(false)
 
     const [values, setValues] = useState({
         tag: "",
@@ -32,13 +33,14 @@ export default function Project() {
         githab_links: "",
         img: "",
     })
-    const [options, setOptions] = useState(["challenge", "personal", "work"])
+    const [options] = useState(["challenge", "personal", "work"])
 
     const getProjectData = () => {
+        setLoader(true)
         axios.get("http://localhost:4000/api/projectGetAll")
             .then((res) => {
-                console.log(res)
                 setData(res.data.data)
+                setLoader(false)
             })
             .catch((err) => {
                 console.log(err)
@@ -220,7 +222,6 @@ export default function Project() {
         })
         setAction("Add")
         setPopUpState(true)
-        alert("Hello")
     }
 
     useEffect(() => {
@@ -231,6 +232,7 @@ export default function Project() {
         <div>
             <Minlayout>
                 <div className='px-6'>
+                
 
                     <PopUp
                         state={popUpState}
@@ -380,6 +382,8 @@ export default function Project() {
 
 
                     </PopUp>
+
+                    <Loader loaderState={loader}/>
 
                     <ActionBar
                         button_name="Add"

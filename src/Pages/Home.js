@@ -6,14 +6,10 @@ import Arrow from "../Components/Assets/Images/arrow.png"
 import diamond from "../Components/Assets/Images/diamond.png"
 import artsign from "../Components/Assets/Images/art-sign.png"
 import pdf from "../Components/Assets/Images/Balamurugan.pdf"
-
-import { IconNameCgArrowsScrollV } from "react-icons/cg";
-import profile from "../Components/Assets/Images/bala.png"
+import profile from "../Components/Assets/Images/Bala-new.png"
 import { RiCodeSSlashLine, RiArrowRightUpLine, RiHeartLine, RiGithubLine, RiLinkedinLine, RiMailSendLine } from "react-icons/ri";
 import { HiMiniArrowLongDown } from "react-icons/hi2";
-import about from "../Components/Assets/Images/about-bala.png"
 import { PiTelegramLogoLight } from "react-icons/pi";
-import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -28,7 +24,6 @@ import 'swiper/css/thumbs';
 // import './styles.css';
 
 // import required modules
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
 // import './styles.css';
 
@@ -55,9 +50,7 @@ export default function Home() {
     const [darkMode, setDarkMode] = useState(false)
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [vaild, setvaild] = useState(true)
-    const handleDrakMode = () => {
-        setDarkMode(!darkMode)
-    }
+  
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -198,16 +191,16 @@ export default function Home() {
                                                 <div className={`${darkMode}  center `}>
                                                     <a href={nav?.url_link}>
 
-                                            
-                                                    <div className={`${darkMode ? "text-white" : ""} text-text-color px-10 hover:text-black duration-300 cursor-pointer`}>{nav?.name}</div>        </a>
+
+                                                        <div className={`${darkMode ? "text-white" : ""} text-text-color px-10 hover:text-black duration-300 cursor-pointer`}>{nav?.name}</div>        </a>
                                                 </div>
                                             )
                                         })}
 
                                         <div className='col-span-2'>
-                                          <a href={"#contact"}> <div className={`${darkMode ? "bg-white" : "bg-primary text-white  "}  center py-4 px-10  cursor-pointer  hover:bg-active-color duration-300 mx-4 `}>
+                                            <a href={"#contact"}> <div className={`${darkMode ? "bg-white" : "bg-primary text-white  "}  center py-4 px-10  cursor-pointer  hover:bg-active-color duration-300 mx-4 `}>
                                                 Contact
-                                            </div></a> 
+                                            </div></a>
                                         </div>
                                     </div>
                                 </div>
@@ -235,11 +228,11 @@ export default function Home() {
                                 Frontend Developer, with Knowledge in web development and design, I offer the best projects resulting in quality work.
                             </div>
                             <div className=' lg:visible md:hidden xl:visible visible lgmd:visible mdsm:visible sm:hidden '>Hello</div>
-                            <div className='  grid grid-cols-2'>
-                               <a href={pdf} download><div className='sm:hidden flex absolute bottom-[100px] tracking-wider duration-300 hover:tracking-widest hover:bg-active-color left-0 bg-primary h-[40px] py-2 text-white px-10 cursor-pointer'>
+                            <div className='  grid grid-cols-2 pt-4'>
+                                <a href={pdf} download><div className='sm:hidden flex absolute bottom-[40px] tracking-wider duration-300 hover:tracking-widest hover:bg-active-color left-0 bg-primary h-[40px] py-2 text-white px-10 cursor-pointer'>
                                     <HiMiniArrowLongDown className=' text-h5 text-white mt-1 mr-2' />  Resume
-                                </div></a> 
-                                <div className='absolute bottom-[70px] right-0 sm:hidden'>
+                                </div></a>
+                                <div className='absolute bottom-[20px] right-0 sm:hidden'>
                                     <img src={artsign} />
                                 </div>
                             </div>
@@ -251,13 +244,13 @@ export default function Home() {
                 </div>
             </section>
 
-            <section id="about"  className=' bg-secondary py-16 sm:px-2 sm:pb-0'>
+            <section id="about" className=' bg-secondary py-16 sm:px-2 sm:pb-0'>
                 <div className='  py-10 container mx-auto sm:pb-0'>
                     <div className=' grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2  lgmd:grid-cols-2 py-8 sm:grid-cols-1'>
 
 
                         <div>
-                            <img src={about} alt="about" className='mx-auto px-16 sm:px-0' />
+                            <img src={profile} alt="about" className='mx-auto px-16 sm:px-0' />
                         </div>
                         <div className='relative h-full py-10'>
                             <div className='grid grid-cols-3 relative '>
@@ -268,7 +261,7 @@ export default function Home() {
                                 <div className='h-[2px] mt-4 w-[60px] bg-[#222]'>
 
                                 </div>
-                               
+
                                 <div className={` text-h2 text-text-color px-4 sm:text-h4`}>
                                     Passionate about creating Web Pages with UI/UX User Interface. I have a year of experience and many client are happy with the project carried out.
                                 </div>
@@ -280,7 +273,7 @@ export default function Home() {
                                 </div>
                             </div>
                             <a href={'#contact'}>
-                            <button className='mx-10 sm:mx-4  my-10 flex group bg-primary text-white    center py-4  cursor-pointer  hover:bg-active-color duration-300   px-10'><PiTelegramLogoLight className='mx-2 text-h5 ' /> Contact Me</button></a>
+                                <button className='mx-10 sm:mx-4  my-10 flex group bg-primary text-white    center py-4  cursor-pointer  hover:bg-active-color duration-300   px-10'><PiTelegramLogoLight className='mx-2 text-h5 ' /> Contact Me</button></a>
 
                         </div>
 
@@ -319,8 +312,8 @@ export default function Home() {
                                 Frontend Development
                             </div>
                             <p className=' text-text-color'>
-                            Delivering highly executed front-end user experiences by paying close attention to optimization, and performance.
-                            I like to code things from scratch, and enjoy bringing ideas to life in the browser.
+                                Delivering highly executed front-end user experiences by paying close attention to optimization, and performance.
+                                I like to code things from scratch, and enjoy bringing ideas to life in the browser.
                             </p>
                         </div>
 

@@ -7,7 +7,6 @@ import PopUp from '../../Components/Layout/PopUp';
 import Button from '../../Components/Fields/Button';
 import ActionBar from '../../Components/Layout/ActionBar';
 import ActionPopUp from '../../Components/Fields/ActionPopUp';
-import { FiSave } from 'react-icons/fi';
 
 function Navbar() {
     const [getData, setGetData] = useState()
