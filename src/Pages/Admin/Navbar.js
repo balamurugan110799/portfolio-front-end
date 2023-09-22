@@ -7,7 +7,6 @@ import PopUp from '../../Components/Layout/PopUp';
 import Button from '../../Components/Fields/Button';
 import ActionBar from '../../Components/Layout/ActionBar';
 import ActionPopUp from '../../Components/Fields/ActionPopUp';
-import { FiSave } from 'react-icons/fi';
 
 function Navbar() {
     const [getData, setGetData] = useState()
@@ -211,6 +210,7 @@ function Navbar() {
                         handleChange={(e) => handleChange(e)}
                     />
                     {dataVal ? <span className='text-error text-sm'> {errors.url}</span> : null}
+              
                     {action === "Add" ? <div className="flex justify-end px-4 pt-3 ">
                         <Button name="Cancel" className="mx-2" onClick={() => toggleHandler()} />
                         <Button name="Add" onClick={handleSubmit} />

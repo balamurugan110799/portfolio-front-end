@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
 import axios from 'axios';
 import { RiLockPasswordLine, RiMailLine } from "react-icons/ri";
 import loginPic from "../../Components/Assets/Images/Login/login.png"
@@ -57,9 +56,9 @@ function Login() {
       axios.post('http://localhost:4000/api/login', data)
         .then((res) => {
           // alert("Hello")
-          console.log(res.data.token)
           const token = res.data.token
           sessionStorage.setItem("auth", token)
+          window.location.href="/dashboard"
           navigate('/dashboard')
         
           dbMessage.password = ""

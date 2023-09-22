@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import Minlayout from '../../Components/Layout/Min-layout'
-import { RiHeart3Line } from "react-icons/ri";
 import axios from 'axios'
+import Loader from '../../Components/Layout/Loader';
 
 export default function DashBoard() {
   const [project,setProject] =useState()
+  const [loader,setLoader] =useState(false)
 
   const getProjectData = () => {
+    setLoader(true)
     axios.get("http://localhost:4000/api/projectGetAll")
         .then((res) => {
-            console.log(res)
+            // console.log(res)
             setProject(res.data)
+            setLoader(false)
         })
         .catch((err) => {
             console.log(err)
@@ -52,6 +55,7 @@ console.log(project)
             </div>
 
           </div>
+          <Loader loaderState={loader}/>
         
          
       </Minlayout>
