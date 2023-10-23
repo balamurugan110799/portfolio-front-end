@@ -114,12 +114,10 @@ export default function Project() {
         setAction("Update")
         setValues(v)
         setImgs("")
+        getProjectData()
     }
 
     const submitHandlerUpdate = () => {
-
-
-
         axios.put(`http://localhost:4000/api/updateProject/${values._id}`, values)
             .then((res) => {
                 alert("Submited")
@@ -255,10 +253,11 @@ export default function Project() {
                                         onChange={(e) => handleChange(e)}
                                         id="tag"
                                     >
+                                        <option style={{display:"none"}} className='text-dash-text-color '>Select the Tag</option>
                                         {options?.map((v, i) => {
                                             return (
                                                 <option
-                                                    name="tag" value={v}>{v}</option>
+                                                className='text-dash-text-color '   name="tag" value={v}>{v}</option>
                                             )
                                         })}
                                     </select>
@@ -393,7 +392,7 @@ export default function Project() {
                     <div className=''>
 
 
-                        <div className=''>
+                        <div className='h-[500px] overflow-auto '>
 
 
                             <table className='w-full '>
@@ -413,13 +412,13 @@ export default function Project() {
                                     <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
                                         preview_link
                                     </td>
-                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
+                                    <td className="myPoppinsFont w-[100px] text-sm tracking-wider text-dash-text-color py-2 px-2 ">
                                         heart_likes
                                     </td>
-                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
+                                    <td className="myPoppinsFont w-[100px] text-sm tracking-wider text-dash-text-color py-2 px-2 ">
                                         gitdab_links
                                     </td>
-                                    <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
+                                    <td className="myPoppinsFont w-[100px] text-sm tracking-wider text-dash-text-color py-2 px-2 ">
                                         gitlab_count
                                     </td>
                                     <td className="myPoppinsFont text-sm tracking-wider text-dash-text-color py-2 px-2 ">
@@ -436,10 +435,10 @@ export default function Project() {
                                                 <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>{i}</td>
                                                 <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>{v?.tag}</td>
                                                 <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>{v?.title}</td>
-                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2 text-ellipsis overflow-hidden'><div class="overflow-hidden truncate w-[200px] myPoppinsFont text-left text-[14px] text-text-color">{v?.des}</div> </td>
-                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2 text-ellipsis overflow-hidden'><p className='text-ellipsis overflow-hidden  w-[200px] myPoppinsFont text-left text-[14px] text-text-color '>{v?.preview_link}</p> </td>
+                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2 text-ellipsis overflow-hidden'><div class="overflow-hidden truncate w-[100px] myPoppinsFont text-left text-[14px] text-text-color">{v?.des}</div> </td>
+                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2 text-ellipsis overflow-hidden'><p className='text-ellipsis overflow-hidden  w-[100px] myPoppinsFont text-left text-[14px] text-text-color '>{v?.preview_link}</p> </td>
                                                 <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>{v?.heart_likes}</td>
-                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2 text-ellipsis overflow-hidden'> <p className='text-ellipsis overflow-hidden  w-[200px] myPoppinsFont text-left text-[14px] text-text-color'>{v?.githab_links}</p> </td>
+                                                <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2 text-ellipsis overflow-hidden'> <p className='text-ellipsis overflow-hidden  w-[100px] myPoppinsFont text-left text-[14px] text-text-color'>{v?.githab_links}</p> </td>
                                                 <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>{v?.gitlab_count}</td>
                                                 <td className='myPoppinsFont text-left text-[14px] text-text-color py-1 px-2'>
                                                     <img src={v?.img} className=' h-[50px] w-[50px]' />

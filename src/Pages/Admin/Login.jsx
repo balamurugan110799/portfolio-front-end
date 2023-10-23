@@ -72,6 +72,7 @@ function Login() {
           setForceRender(!forceRender)
           dbMessage.email = err?.response?.data?.message_email;
           dbMessage.password = err?.response?.data?.message_password;
+          console.log(err?.response?.data?.message_password)
           if (dbMessage.email === undefined) {
             dbMessage.email = ""
           }

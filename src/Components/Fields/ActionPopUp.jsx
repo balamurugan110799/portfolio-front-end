@@ -15,11 +15,8 @@ export default function ActionPopUp(props) {
                                 <p className='text-white myPoppinsFont text-[18px] tracking-wide heading title pt-[1px]'>{props.title}</p>
                             </div>
                             <div className='p-4'>
-
                             {props.children}
                             </div>
-
-
                         </div>
                     </div>
                 </div>
